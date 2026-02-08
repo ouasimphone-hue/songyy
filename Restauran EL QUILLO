@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Quillo Restaurante | Getafe, Madrid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --primary-dark: #8B0000;
+            --primary-light: #DC143C;
+            --accent: #FFD700;
+            --accent-dark: #DAA520;
+            --background: #1A1A1A;
+            --background-alt: #0F0F0F;
+            --card-bg: #252525;
+            --text-dark: #FFFFFF;
+            --text-medium: #E0E0E0;
+            --text-light: #B0B0B0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-label::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(196, 30, 58, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #DC143C 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,215,0,0.03) 2px, rgba(255,215,0,0.03) 4px);
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white);
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-main {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 2;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--background);
+            text-decoration: none;
+            font-weight: 900;
+            letter-spacing: 3px;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            animation: fadeInUp 1s ease 0.8s backwards;
+            text-transform: uppercase;
+            border: 3px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--accent);
+            animation: fadeInUp 1s ease 1s backwards;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .scroll-arrow {
+            width: 35px;
+            height: 35px;
+            margin: 0 auto;
+            border-left: 3px solid var(--accent);
+            border-bottom: 3px solid var(--accent);
+            transform: rotate(-45deg);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: rotate(-45deg) translateY(0);
+            }
+            40% {
+                transform: rotate(-45deg) translateY(15px);
+            }
+            60% {
+                transform: rotate(-45deg) translateY(8px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 0;
+            background: var(--background-alt);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            box-shadow: 0 25px 70px rgba(196, 30, 58, 0.5);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--accent);
+        }
+
+        .about-image .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .about-content {
+            animation: fadeInRight 1s ease;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.4);
+        }
+
+        .feature-number {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 8rem 0;
+            background: var(--background);
+            position: relative;
+        }
+
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .menu-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .menu-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 3px solid var(--primary);
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .menu-tab:hover,
+        .menu-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-color: var(--accent);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5);
+        }
+
+        .menu-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .menu-category.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .menu-item {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1F1F1F 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(196, 30, 58, 0.4);
+            border-left-color: var(--accent);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .menu-item-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .menu-item-description {
+            color: var(--text-medium);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 8rem 0;
+            background: var(--background-alt);
+            position: relative;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.3);
+            transition: all 0.4s ease;
+            border: 3px solid var(--primary);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.08) rotate(2deg);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.5);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 0;
+            background: var(--background);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-left-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .contact-item h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: var(--text-medium);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .contact-form-container {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1F1F1F 100%);
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.4);
+            border: 2px solid var(--primary);
+        }
+
+        .contact-form-container h3 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--background);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.3rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--background);
+            border: 3px solid var(--accent);
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(180deg, var(--background-alt) 0%, #000000 100%);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            border-top: 3px solid var(--primary);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .footer-logo p {
+            margin-top: 0.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .social-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(196, 30, 58, 0.3);
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-main {
+                font-size: 3.5rem;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 75px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--background);
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5);
+                transition: right 0.3s ease;
+                gap: 1.5rem;
+                border-top: 2px solid var(--primary);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hero-main {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .contact-form-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-main {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .menu-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .menu-tab {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">
+                <span class="logo-text">🍽️ EL QUILLO</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Inicio</a></li>
+                <li><a href="#about" class="nav-link">Nosotros</a></li>
+                <li><a href="#menu" class="nav-link">Menú</a></li>
+                <li><a href="#gallery" class="nav-link">Galería</a></li>
+                <li><a href="#contact" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-subtitle">Bienvenidos a</span>
+                <span class="hero-main">EL QUILLO</span>
+            </h1>
+            <p class="hero-description">Cachopos gourmet XXL y el Mejor Torrezno de Madrid 2024 🏆 | Cocina tradicional con calidad premium en Getafe</p>
+            <a href="#menu" class="cta-button">Descubre Nuestro Menú</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Descubre más</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <!-- INSTRUCCIONES: Descarga fotos reales desde Google Maps:
+                         1. Busca "El Quillo Getafe" en Google Maps
+                         2. Clic en "Fotos" (238 fotos disponibles)
+                         3. Descarga la que más te guste del cachopo o del premio
+                         4. Guárdala como "premio.jpg" en la misma carpeta
+                         5. Reemplaza el src="https://..." con "premio.jpg"
+                    -->
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=750&fit=crop" 
+                         alt="El Quillo - Cachopos Gourmet" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px; border: 3px solid var(--accent);">
+                </div>
+                <div class="about-content">
+                    <span class="section-label">Nuestra Historia</span>
+                    <h2 class="section-title">Cachopos Gourmet & Torreznos Premiados</h2>
+                    <p class="about-text">
+                        Somos un equipo joven de Getafe (Carlos, Yaiza y Aarón) que con <strong>pasión y dedicación</strong> hemos creado 
+                        un restaurante especializado en <strong>cachopos gourmet</strong> y <strong>torreznos de Soria</strong>. 
+                        Nuestro secreto: ingredientes de primera calidad y técnicas propias desarrolladas a base de ensayo y error.
+                    </p>
+                    <p class="about-text">
+                        En 2024 ganamos el premio al <strong>MEJOR TORREZNO DE SORIA de la Comunidad de Madrid</strong>, 
+                        un reconocimiento que nos llena de orgullo. Nuestros torreznos son crujientes, sabrosos y sin exceso de grasa, 
+                        gracias a nuestra técnica especial de cocción. ¡Ven a probarlos!
+                    </p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <span class="feature-number">🏆</span>
+                            <span class="feature-label">Mejor Torrezno Madrid 2024</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-number">4.7★</span>
+                            <span class="feature-label">Valoración Google</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-number">100%</span>
+                            <span class="feature-label">Calidad Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="menu-header">
+                <span class="section-label">Nuestra Carta</span>
+                <h2 class="section-title">Cachopos & Especialidades</h2>
+                <p class="menu-subtitle">Cachopos gourmet XXL y torreznos premiados. Cocina tradicional con toques innovadores para compartir</p>
+            </div>
+
+            <!-- Menu Categories -->
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-category="entrantes">🥗 Entrantes</button>
+                <button class="menu-tab" data-category="principales">🍖 Cachopos</button>
+                <button class="menu-tab" data-category="postres">🍰 Postres</button>
+                <button class="menu-tab" data-category="bebidas">🍷 Bebidas</button>
+            </div>
+
+            <!-- Entrantes -->
+            <div class="menu-category active" data-category="entrantes">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">🏆 Torreznos de Soria con Patatas Revolconas</h3>
+                            <span class="menu-item-price">€12.90</span>
+                        </div>
+                        <p class="menu-item-description">¡GANADORES DEL MEJOR TORREZNO DE MADRID 2024! Panceta de Soria crujiente por fuera, jugosa por dentro. Técnica especial: horno, doble fritura y tostado final. Sin exceso de grasa</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Nachos con Guacamole XXL</h3>
+                            <span class="menu-item-price">€13.90</span>
+                        </div>
+                        <p class="menu-item-description">Nachos bien cargaditos con guacamole casero, queso fundido, jalapeños y crema agria. ¡Perfectos para compartir!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Empanadas Criollas de Carne</h3>
+                            <span class="menu-item-price">€10.90</span>
+                        </div>
+                        <p class="menu-item-description">Empanadas caseras rellenas de carne especiada con toques latinoamericanos. Crujientes y sabrosas</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Croquetas de Rabo de Toro (7 uds.)</h3>
+                            <span class="menu-item-price">€10.00</span>
+                        </div>
+                        <p class="menu-item-description">Croquetas cremosas de rabo de toro estofado. Crujientes por fuera, melosas por dentro. ¡Espectaculares!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Ensalada Mar y Montaña</h3>
+                            <span class="menu-item-price">€11.50</span>
+                        </div>
+                        <p class="menu-item-description">Ensalada fresca con torreznos crujientes y gambas. La combinación perfecta de tierra y mar</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Ensalada de Frutos del Bosque</h3>
+                            <span class="menu-item-price">€10.50</span>
+                        </div>
+                        <p class="menu-item-description">Mix de lechugas con frutos rojos, queso de cabra, nueces y vinagreta de frutos del bosque</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cachopos -->
+            <div class="menu-category" data-category="principales">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo Asturiano</h3>
+                            <span class="menu-item-price">€22.00</span>
+                        </div>
+                        <p class="menu-item-description">El clásico: ternera empanada XXL rellena de jamón serrano, mozzarella y pimientos asados. Servido con patatas fritas. ¡Nuestro bestseller!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo Leonés</h3>
+                            <span class="menu-item-price">€24.50</span>
+                        </div>
+                        <p class="menu-item-description">Ternera premium rellena de queso de cabra, cecina de León y mozzarella. Empanado dorado y crujiente. ¡Una delicia gourmet!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo Gallego con Lacón</h3>
+                            <span class="menu-item-price">€23.00</span>
+                        </div>
+                        <p class="menu-item-description">Filetes empanados rellenos de lacón gallego, queso Arzúa-Ulloa y pimientos de Padrón. Sabor auténtico del norte</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo de Salmón</h3>
+                            <span class="menu-item-price">€23.50</span>
+                        </div>
+                        <p class="menu-item-description">Versión especial con salmón ahumado, queso crema y anchoas. Empanado perfecto. ¡Sorpréndete con esta combinación!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo 4 Quesos</h3>
+                            <span class="menu-item-price">€22.50</span>
+                        </div>
+                        <p class="menu-item-description">Para los amantes del queso: mozzarella, queso azul, manchego y parmesano. Cremoso y delicioso</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cachopo Boletus</h3>
+                            <span class="menu-item-price">€24.00</span>
+                        </div>
+                        <p class="menu-item-description">Ternera rellena de boletus edulis, jamón ibérico y queso semicurado. Sabor otoñal irresistible</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Postres -->
+            <div class="menu-category" data-category="postres">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Tarta de Queso Casera</h3>
+                            <span class="menu-item-price">€6.50</span>
+                        </div>
+                        <p class="menu-item-description">Cheesecake cremosa al estilo clásico con base de galleta. Suave y deliciosa</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Tiramisú de Pistacho</h3>
+                            <span class="menu-item-price">€7.00</span>
+                        </div>
+                        <p class="menu-item-description">Versión especial del clásico italiano con crema de pistacho, bizcochos de soletilla y café. ¡Delicioso!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Coulant de Pistacho</h3>
+                            <span class="menu-item-price">€7.50</span>
+                        </div>
+                        <p class="menu-item-description">Bizcocho de pistacho con corazón fundido, helado de vainilla. El postre perfecto para los amantes del pistacho</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Torrija de la Casa</h3>
+                            <span class="menu-item-price">€6.00</span>
+                        </div>
+                        <p class="menu-item-description">Torrija tradicional empapada en leche, canela y azúcar. Servida caliente con helado. ¡Increíble!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Pastel de Frutas del Bosque</h3>
+                            <span class="menu-item-price">€6.50</span>
+                        </div>
+                        <p class="menu-item-description">Bizcocho esponjoso con crema y frutas frescas del bosque. Ligero y refrescante</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Helados Artesanales</h3>
+                            <span class="menu-item-price">€5.50</span>
+                        </div>
+                        <p class="menu-item-description">Variedad de sabores: vainilla, chocolate, fresa, pistacho. Pregunta por el sabor del día</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bebidas -->
+            <div class="menu-category" data-category="bebidas">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Sidra Asturiana</h3>
+                            <span class="menu-item-price">€3.50</span>
+                        </div>
+                        <p class="menu-item-description">Sidra natural asturiana. El acompañamiento perfecto para los cachopos. ¡Escanciada al estilo tradicional!</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Vinos Tintos y Blancos</h3>
+                            <span class="menu-item-price">desde €12.00</span>
+                        </div>
+                        <p class="menu-item-description">Selección de vinos españoles: Ribera del Duero, Rioja, Albariño. Consulta nuestra carta de vinos</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cervezas (Caña/Jarra)</h3>
+                            <span class="menu-item-price">€2.50 / €4.50</span>
+                        </div>
+                        <p class="menu-item-description">Cerveza de barril bien fría. Mahou, Amstel y cervezas artesanales</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Café de Calidad</h3>
+                            <span class="menu-item-price">€1.80</span>
+                        </div>
+                        <p class="menu-item-description">Café solo, cortado, con leche. Grano seleccionado y recién molido</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Refrescos y Zumos</h3>
+                            <span class="menu-item-price">€2.50</span>
+                        </div>
+                        <p class="menu-item-description">Coca-Cola, Fanta, Sprite, Aquarius, zumos naturales</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Agua Mineral</h3>
+                            <span class="menu-item-price">€2.00</span>
+                        </div>
+                        <p class="menu-item-description">Agua mineral con gas o sin gas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="gallery-header">
+                <span class="section-label">Momentos Especiales</span>
+                <h2 class="section-title">Nuestra Galería</h2>
+            </div>
+            <div class="gallery-grid">
+                <!-- Fotos de ejemplo - REEMPLAZA con fotos reales de El Quillo
+                     Para descargar fotos reales:
+                     1. Ve a Google Maps y busca "El Quillo Getafe"
+                     2. Haz clic en "Fotos" (238 fotos disponibles)
+                     3. Descarga las que más te gusten
+                     4. Guárdalas en la misma carpeta que este HTML
+                     5. Reemplaza los src="https://..." con "nombre-foto.jpg"
+                -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1619740455993-557c99cc0fa2?w=800&h=800&fit=crop" 
+                         alt="Cachopo Asturiano" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1625937329935-0f222e02c22c?w=800&h=800&fit=crop" 
+                         alt="Torreznos Premiados" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=800&fit=crop" 
+                         alt="Interior del Restaurante" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&h=800&fit=crop" 
+                         alt="Nachos con Guacamole" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&h=800&fit=crop" 
+                         alt="Postres Caseros" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=800&fit=crop" 
+                         alt="Ambiente Acogedor" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-label">Visítanos</span>
+                    <h2 class="section-title">Contacto</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <h3>📍 Dirección</h3>
+                            <p>C/ Dolores Ibarruri, 1<br>28901 Getafe, Madrid, España</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>📞 Teléfono</h3>
+                            <p>915 61 65 96</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>📧 Reservas Online</h3>
+                            <p><a href="https://myrestoo.net" target="_blank" style="color: var(--accent); text-decoration: none;">myrestoo.net</a><br>info@elquillo.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>🕐 Horario</h3>
+                            <p><strong>Jueves - Domingo:</strong> 13:00 - 18:00<br>
+                            <strong>Viernes - Sábado:</strong> 20:30 - 00:30<br>
+                            <strong>Lunes - Miércoles:</strong> Cerrado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <h3>Reserva tu Mesa</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre completo *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Teléfono *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Número de personas *</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6">6+ personas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mensaje o peticiones especiales (opcional)" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">🍽️ EL QUILLO</span>
+                    <p>Cachopos Gourmet | Getafe</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/elquillorestaurante/" target="_blank" class="social-link">📷 Instagram</a>
+                    <a href="https://myrestoo.net" target="_blank" class="social-link">📅 Reservas Online</a>
+                    <a href="tel:+34915616596" class="social-link">📞 Llamar</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 El Quillo Restaurante - Getafe, Madrid. Todos los derechos reservados. | Diseñado con ❤️ para los amantes de la buena comida</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Menu category tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuCategories = document.querySelectorAll('.menu-category');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.getAttribute('data-category');
+                
+                menuTabs.forEach(t => t.classList.remove('active'));
+                menuCategories.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.querySelector(`.menu-category[data-category="${category}"]`).classList.add('active');
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por tu reserva! Te contactaremos pronto para confirmar tu mesa. 🎉');
+            contactForm.reset();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.menu-item, .gallery-item, .contact-item');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Parallax hero effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
